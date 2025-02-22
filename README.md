@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# 🚀 Bank Churn Prediction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Overview
+This is a **Bank Churn Prediction** system that uses a **React** frontend (Netflix-inspired UI) and a **FastAPI** backend for model inference. The goal is to predict whether a bank customer is likely to exit (churn) based on key features such as credit score, balance, and demographics.
 
-## Available Scripts
+## 🛠 Tech Stack
+- **Frontend:** React (JavaScript)
+- **Machine Learning Backend:** FastAPI (Python)
+- **Containerization (Optional):** Docker & Docker Compose
+- **Additional Tools:** scikit-learn, joblib (for model serialization)
 
-In the project directory, you can run:
+## 📁 Project Structure
+```bash
+bank-churn-app/
+├── backend/              # FastAPI application
+│   ├── main.py           # FastAPI entry point
+│   ├── model.pkl         # Pre-trained model (example)
+│   ├── requirements.txt  # Python dependencies
+├── frontend/
+│   ├── my-react-app/
+│   │   ├── public/
+│   │   │   ├── sources/  # HTML files displayed by the React app
+│   │   │   │   ├── test1.html
+│   │   │   │   ├── test2.html
+│   │   │   │   └── ...
+│   │   ├── src/
+│   │   │   ├── App.js    # Main React file (Presentation, Predictions, About)
+│   │   │   ├── App.css   # Netflix-inspired styling
+│   │   │   └── ...
+│   │   ├── package.json
+│   │   └── ...
+└── docker-compose.yml     # Optional Docker config (if used)
+```
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ⚙️ Installation & Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- **Node.js** (v14 or higher)
+- **Python** 3.7+ and pip (or conda)
 
-### `npm test`
+### Steps
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/bank-churn-app.git
+```
 
-### `npm run build`
+2. **Backend Setup**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+# FastAPI will run on http://localhost:8000
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Frontend Setup**
+```bash
+cd ../frontend/my-react-app
+npm install
+npm start
+# React app will run on http://localhost:3000
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📖 Usage
 
-### `npm run eject`
+### 1. Home (Presentation)
+- Visit [http://localhost:3000](http://localhost:3000) to view the **Home** page.  
+- Use the **Previous** and **Next** buttons to cycle through the local HTML files in `public/sources`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 2. Predictions
+- Click the **Predictions** menu item in the sidebar.
+- Fill out the form fields (Credit Score, Age, etc.).
+- Click **Predict** to send data to FastAPI.
+- The response indicates if the customer is likely to exit.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. About
+- Click the **About** menu item to learn more about the churn concept, why it matters, and how the app predicts churn.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🔍 Technical Details
 
-## Learn More
+### A) React Frontend
+- **Netflix-inspired styling** (`App.css`)
+- **Auto-resizing iframe** using `useRef` and `onLoad` (Home page)
+- **Two-column form layout** for Predictions
+- **Hero image & info cards** on About page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### B) FastAPI Backend
+- `main.py` contains the `/predict` endpoint.
+- Accepts JSON data with fields (e.g., `creditScore`, `balance`, etc.) mapped to a **pydantic** `BaseModel` (`CustomerData`).
+- Loads a **pre-trained model** (`model.pkl`) using **joblib**.
+- Returns a JSON response, for example:
+```json
+{ "will_exit": true }
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🔧 Running Locally (Development & Testing)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+> **Note:** If you’re not using Docker, skip directly to **Backend Setup** and **Frontend Setup**.
 
-### Analyzing the Bundle Size
+### 1️⃣ (Optional) Using Docker & Docker Compose
+```bash
+docker-compose up --build -d
+```
+Check running containers:
+```bash
+docker ps
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2️⃣ Start FastAPI Backend (Standalone)
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+The FastAPI server will run on [http://localhost:8000](http://localhost:8000).
 
-### Making a Progressive Web App
+### 3️⃣ Start React Frontend (Standalone)
+```bash
+cd frontend/my-react-app
+npm install
+npm start
+```
+The React app will run on [http://localhost:3000](http://localhost:3000).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🧪 Testing the Predictions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Navigate to the **Predictions** page in the React app.  
+2. Fill in the form with customer data (e.g., credit score, balance, etc.).  
+3. Click **Predict**.  
+   - The app sends a `POST` request to `http://localhost:8000/predict`.  
+   - The FastAPI server returns JSON like:
+     ```json
+     {
+       "will_exit": true
+     }
+     ```
+4. The UI displays whether the customer is likely to exit or not.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🔄 How It Works
 
-### `npm run build` fails to minify
+1. **FastAPI** loads a pre-trained scikit-learn model (`model.pkl`).  
+2. The **React** app collects user input (credit score, age, etc.) and sends it to the FastAPI `/predict` endpoint.  
+3. FastAPI transforms the input into the required format, calls `model.predict(...)`, and returns a JSON response indicating whether the user is likely to churn.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🚀 Future Enhancements
+- **Database Integration**: Use Postgres, MySQL, or another DB for storing customer data.
+- **User Authentication**: Add login/registration and an admin dashboard.
+- **Expanded Features**: Incorporate transaction history, product usage, or additional data for improved predictions.
+
+---
+
+## Screenshots
+
+### 1. About Page
+![About Page](./screenshots/about.JPG "About Page")
+
+### 2. Analytics Page
+![Home Page](./screenshots/home.JPG "Home Page")
+
+### 3. Predictions Page
+![Predictions Page](./screenshots/predictions.JPG "Predictions Page")
+
+---
+
+**Enjoy Predicting with Churnflix!**
+```
