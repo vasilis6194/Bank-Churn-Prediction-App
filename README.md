@@ -1,168 +1,15 @@
 # 🚀 Bank Churn Prediction
 
 ## 📌 Overview
-This is a **Bank Churn Prediction** system that uses a **React** frontend (Netflix-inspired UI) and a **FastAPI** backend for model inference. The goal is to predict whether a bank customer is likely to exit (churn) based on key features such as credit score, balance, and demographics.
 
-## 🛠 Tech Stack
-- **Frontend:** React (JavaScript)
-- **Machine Learning Backend:** FastAPI (Python)
-- **Containerization (Optional):** Docker & Docker Compose
-- **Additional Tools:** scikit-learn, joblib (for model serialization)
+Churnflix is a **Netflix-inspired web application** designed to help banks predict **customer churn**. By analyzing financial and demographic data, the system provides **early warnings** about customers likely to leave, allowing banks to take **proactive measures** to retain them.
 
-## 📁 Project Structure
-```bash
-bank-churn-app/
-├── backend/              # FastAPI application
-│   ├── main.py           # FastAPI entry point
-│   ├── model.pkl         # Pre-trained model (example)
-│   ├── requirements.txt  # Python dependencies
-├── frontend/
-│   ├── my-react-app/
-│   │   ├── public/
-│   │   │   ├── sources/  # HTML files displayed by the React app
-│   │   │   │   ├── test1.html
-│   │   │   │   ├── test2.html
-│   │   │   │   └── ...
-│   │   ├── src/
-│   │   │   ├── App.js    # Main React file (Presentation, Predictions, About)
-│   │   │   ├── App.css   # Netflix-inspired styling
-│   │   │   └── ...
-│   │   ├── package.json
-│   │   └── ...
-└── docker-compose.yml     # Optional Docker config (if used)
-```
+The system consists of:
+✅ **A sleek React frontend** for user interaction\
+✅ **A FastAPI backend** serving a machine learning model (XGBoost)\
+✅ **Feature importance analysis using XGBoost** to explain key churn factors
 
 ---
-
-## ⚙️ Installation & Setup
-
-### Prerequisites
-- **Node.js** (v14 or higher)
-- **Python** 3.7+ and pip (or conda)
-
-### Steps
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/your-username/bank-churn-app.git
-```
-
-2. **Backend Setup**
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-# FastAPI will run on http://localhost:8000
-```
-
-3. **Frontend Setup**
-```bash
-cd ../frontend/my-react-app
-npm install
-npm start
-# React app will run on http://localhost:3000
-```
-
----
-
-## 📖 Usage
-
-### 1. Home (Presentation)
-- Visit [http://localhost:3000](http://localhost:3000) to view the **Home** page.  
-- Use the **Previous** and **Next** buttons to cycle through the local HTML files in `public/sources`.
-
-### 2. Predictions
-- Click the **Predictions** menu item in the sidebar.
-- Fill out the form fields (Credit Score, Age, etc.).
-- Click **Predict** to send data to FastAPI.
-- The response indicates if the customer is likely to exit.
-
-### 3. About
-- Click the **About** menu item to learn more about the churn concept, why it matters, and how the app predicts churn.
-
----
-
-## 🔍 Technical Details
-
-### A) React Frontend
-- **Netflix-inspired styling** (`App.css`)
-- **Auto-resizing iframe** using `useRef` and `onLoad` (Home page)
-- **Two-column form layout** for Predictions
-- **Hero image & info cards** on About page
-
-### B) FastAPI Backend
-- `main.py` contains the `/predict` endpoint.
-- Accepts JSON data with fields (e.g., `creditScore`, `balance`, etc.) mapped to a **pydantic** `BaseModel` (`CustomerData`).
-- Loads a **pre-trained model** (`model.pkl`) using **joblib**.
-- Returns a JSON response, for example:
-```json
-{ "will_exit": true }
-```
-
----
-
-## 🔧 Running Locally (Development & Testing)
-
-> **Note:** If you’re not using Docker, skip directly to **Backend Setup** and **Frontend Setup**.
-
-### 1️⃣ (Optional) Using Docker & Docker Compose
-```bash
-docker-compose up --build -d
-```
-Check running containers:
-```bash
-docker ps
-```
-
-### 2️⃣ Start FastAPI Backend (Standalone)
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-The FastAPI server will run on [http://localhost:8000](http://localhost:8000).
-
-### 3️⃣ Start React Frontend (Standalone)
-```bash
-cd frontend/my-react-app
-npm install
-npm start
-```
-The React app will run on [http://localhost:3000](http://localhost:3000).
-
----
-
-## 🧪 Testing the Predictions
-
-1. Navigate to the **Predictions** page in the React app.  
-2. Fill in the form with customer data (e.g., credit score, balance, etc.).  
-3. Click **Predict**.  
-   - The app sends a `POST` request to `http://localhost:8000/predict`.  
-   - The FastAPI server returns JSON like:
-     ```json
-     {
-       "will_exit": true
-     }
-     ```
-4. The UI displays whether the customer is likely to exit or not.
-
----
-
-## 🔄 How It Works
-
-1. **FastAPI** loads a pre-trained scikit-learn model (`model.pkl`).  
-2. The **React** app collects user input (credit score, age, etc.) and sends it to the FastAPI `/predict` endpoint.  
-3. FastAPI transforms the input into the required format, calls `model.predict(...)`, and returns a JSON response indicating whether the user is likely to churn.
-
----
-
-## 🚀 Future Enhancements
-- **Database Integration**: Use Postgres, MySQL, or another DB for storing customer data.
-- **User Authentication**: Add login/registration and an admin dashboard.
-- **Expanded Features**: Incorporate transaction history, product usage, or additional data for improved predictions.
-
----
-
 ## Screenshots
 
 ### 1. About Page
@@ -176,5 +23,127 @@ The React app will run on [http://localhost:3000](http://localhost:3000).
 
 ---
 
-**Enjoy Predicting with Churnflix!**
+## 🛠 Tech Stack
+
+- **Frontend:** React (JavaScript) with a Netflix-style UI
+- **Backend:** FastAPI (Python) for model inference
+- **Machine Learning:** XGBoost for customer churn prediction
+- **Additional Tools:** scikit-learn, joblib (for model serialization), Pandas, NumPy
+- **(Optional)** Docker & Docker Compose for containerized deployment
+
+---
+
+## ⚙️ How It Works
+
+1️⃣ **The user enters financial details** (e.g., Credit Score, Age, Balance).\
+2️⃣ **The XGBoost model analyzes the data** and predicts whether the customer is likely to leave.\
+3️⃣ **The system explains the decision**, showing which factors influenced the prediction the most.\
+4️⃣ **Banks use this information** to retain at-risk customers through personalized offers and better service.
+
+---
+
+## 🔍 Key Insights from the Data
+
+- **80% of customers stay, while 20% leave** – highlighting the need for better retention strategies.
+- **54% of customers are male, 46% are female** – gender distribution is fairly balanced.
+- **Customers aged 35-55 are more likely to leave**, whereas those aged 30-44 tend to stay.
+- **Customers with fewer bank products are more likely to churn**, suggesting stronger engagement strategies are needed.
+
+---
+
+## 📈 Business Impact
+
+- **Preventing Customer Loss:** Banks can identify at-risk customers early and intervene.
+- **Personalized Customer Retention:** Targeted offers and services for customers most likely to churn.
+- **Explainable AI:** XGBoost’s feature importance shows which factors drive customer decisions.
+
+---
+
+## 🔬 Machine Learning Approach
+
+### **1️⃣ Data Processing**
+
+✅ Cleaned and structured data for better model performance.\
+✅ Identified and removed outliers.\
+✅ Scaled numerical features and encoded categorical data.\
+✅ Selected the **top 10 most important features** using feature selection techniques.
+
+### **2️⃣ Model Training**
+
+✅ Trained an **XGBoost classifier**, optimized for accuracy.\
+✅ Used **Grid Search** to fine-tune hyperparameters.\
+✅ Applied **SMOTE** to balance the dataset and avoid bias.
+
+### **3️⃣ Explaining Predictions (Feature Importance)**
+
+✅ **XGBoost’s Built-in Feature Importance** – ranks factors based on predictive power.\
+✅ **Permutation Feature Importance** – measures how each feature affects model accuracy.\
+✅ **Partial Dependence Plots (PDP)** – visualize how individual features impact churn predictions.
+
+---
+
+## 💻 Installation & Setup
+
+### **Prerequisites**
+
+- **Node.js** (v14 or higher) for the frontend
+- **Python 3.7+** and **pip** for the backend
+
+### **Steps to Run the Project**
+
+1️⃣ **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/bank-churn-app.git
 ```
+
+2️⃣ **Backend Setup (FastAPI)**
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+# Runs FastAPI at http://localhost:8000
+```
+
+3️⃣ **Frontend Setup (React)**
+
+```bash
+cd ../frontend/my-react-app
+npm install
+npm start
+# Runs React app at http://localhost:3000
+```
+
+4️⃣ **(Optional) Run with Docker**
+
+```bash
+docker-compose up --build -d
+```
+
+---
+
+## 🏆 Final Deliverables
+
+✅ **A fully functional web app** with live predictions.\
+✅ **A trained XGBoost model** that provides high-accuracy churn forecasts.\
+✅ **Data-driven insights** to help banks reduce churn.\
+✅ **Explainability features** that allow banks to understand customer decisions.
+
+---
+
+## 👥 Project Contributors
+
+- **Vangelis Diaskoufis**
+- **George Birmpakos**
+- **Kostas Kalentzis**
+- **Vasilis Katsikas**
+
+---
+
+## 🚀 Conclusion
+
+Churnflix **transforms raw data into actionable insights**, helping banks retain customers and **improve their services**. With AI-driven predictions and explainability tools, financial institutions can **make informed decisions** and **minimize customer churn**.
+
+📊 **From data to strategy, Churnflix ensures that no customer leaves unnoticed.**
+
