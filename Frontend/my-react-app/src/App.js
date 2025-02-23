@@ -35,7 +35,7 @@ function Presentation() {
       <div className="viewer">
         <iframe
           title="HTML Viewer"
-          src={files[currentIndex].path}
+          src={`${window.location.origin}${files[currentIndex].path}`}
           className="iframe-viewer"
         />
       </div>
