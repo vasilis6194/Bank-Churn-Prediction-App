@@ -1,5 +1,8 @@
 # 🚀 Bank Churn Prediction (Churnflix)
 
+[![Watch the video](https://img.youtube.com/vi/sSKDmfddoZo/0.jpg)](https://www.youtube.com/watch?v=sSKDmfddoZo)
+
+
 ## 📌 Overview
 
 Churnflix is a **Netflix-inspired web application** designed to help banks predict **customer churn**. By analyzing financial and demographic data, the system provides **early warnings** about customers likely to leave, allowing banks to take **proactive measures** to retain them.
