@@ -1,6 +1,6 @@
 # 🚀 Bank Churn Prediction (Churnflix)
 
-[![Watch the video](https://img.youtube.com/vi/sSKDmfddoZo/0.jpg)](https://www.youtube.com/watch?v=sSKDmfddoZo)
+[![Watch the video](https://raw.githubusercontent.com/vasilis6194/Bank-Churn-Prediction-App/main/screenshots/thumbnail.png)](https://www.youtube.com/watch?v=sSKDmfddoZo)
 
 
 ## 📌 Overview
